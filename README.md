@@ -67,9 +67,13 @@ Then open [the local pairing dashboard](http://127.0.0.1:8766/), reopen Anki, an
 .\run-coloring.ps1 -Workers 4
 .\run-coloring.ps1 -Status
 # .\run-coloring.ps1 -Stop
+# Resume an already exported queue if Anki is busy/locked:
+# .\run-coloring.ps1 -Workers 8 -UseExistingQueue
 ```
 
 The launcher takes a read-only collection snapshot, then runs workers hidden in the background. RAM is not the only concurrency limit: more workers can trigger service restrictions. Generation uses your account allowance and can take hours for a large deck.
+
+Anki can hold a lock that prevents even the read-only snapshot. `-UseExistingQueue` resumes the existing validated queue without accessing the collection. It retains the priorities and sentences from the previous export; export again after deck edits when Anki is idle or closed.
 
 **Prepared is not the same as synced.** Workers save alignment cache entries. The installed PC pre-sync hook converts them into permanent note HTML and refreshes vocabulary during normal Anki sync. Alternatively, close Anki and run `sync-anki.py`. Finally sync the iPhone. The scripts preserve scheduling/review history and back up changed notes.
 

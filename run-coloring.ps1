@@ -15,7 +15,8 @@ param(
     [switch]$Status,
     [switch]$Stop,
     [switch]$Resume,
-    [switch]$RetryFailed
+    [switch]$RetryFailed,
+    [switch]$UseExistingQueue
 )
 $ErrorActionPreference = 'Stop'
 $colorRoot = $PSScriptRoot
@@ -32,6 +33,7 @@ if (-not $Foreground -and -not $DryRun) {
         '-Workers', $Workers, '-Limit', $Limit, '-Python', ('"' + $Python + '"'), '-Node', ('"' + $Node + '"'))
     if ($Resume) { $launchArgs += '-Resume' }
     if ($RetryFailed) { $launchArgs += '-RetryFailed' }
+    if ($UseExistingQueue) { $launchArgs += '-UseExistingQueue' }
     $launchId = [Guid]::NewGuid().ToString('N')
     $child = Start-Process -FilePath $shellPath -ArgumentList $launchArgs -WorkingDirectory $colorRoot -WindowStyle Hidden -PassThru `
         -RedirectStandardOutput (Join-Path $colorRoot "coloring-$launchId.log") `
@@ -44,8 +46,12 @@ if (Test-Path -LiteralPath $stopPath) {
     if (-not $Resume) { throw 'A stop request remains. Use -Resume explicitly after checking the cause.' }
     Remove-Item -LiteralPath $stopPath
 }
-& $Python (Join-Path $colorRoot 'export-upcoming-colors.py')
-if ($LASTEXITCODE -ne 0) { throw 'Snapshot export failed; no provider requests started.' }
+if ($UseExistingQueue) {
+    if (-not (Test-Path -LiteralPath (Join-Path $colorRoot 'upcoming-colors.json') -PathType Leaf)) { throw 'No existing queue; export it first.' }
+} else {
+    & $Python (Join-Path $colorRoot 'export-upcoming-colors.py')
+    if ($LASTEXITCODE -ne 0) { throw 'Snapshot export failed; no provider requests started. Use -UseExistingQueue to resume a previously exported queue.' }
+}
 $workerArgs = @($workerPath, $Workers, $Limit)
 if ($DryRun) { $workerArgs += '--dry-run' }
 if ($RetryFailed) { $workerArgs += '--retry-failed' }
