@@ -1,0 +1,12 @@
+{
+  "name": "anki-ai-sentence-coloring",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Permanent bilingual Anki colors and an offline vocabulary library with an optional AI tutor",
+  "scripts": {
+    "start": "node launcher.mjs",
+    "test": "node test-coloring-pipeline.mjs && node test-deck-memory.mjs && node test-automatic-memory.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

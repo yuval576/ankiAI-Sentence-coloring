@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "groups": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "ru": {"type": "array", "items": {"type": "integer"}},
+          "en": {"type": "array", "items": {"type": "integer"}}
+        },
+        "required": ["ru", "en"]
+      }
+    }
+  },
+  "required": ["groups"]
+}

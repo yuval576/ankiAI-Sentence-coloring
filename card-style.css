@@ -1,0 +1,297 @@
+.ru-tutor-context { display:none !important; }
+.ru-settings {margin-top:12px;border-top:1px solid var(--divider,#ddd);padding-top:10px;}
+.ru-settings summary {cursor:pointer;font-weight:600;}
+.ru-settings>.ru-button {margin:8px 5px 0 0;font-size:13px;}
+.ru-memory-toggle {display:flex;align-items:center;gap:8px;margin-top:12px;}
+.ru-memory-toggle input {width:20px;height:20px;}
+.ru-memory-view {max-height:280px;overflow:auto;overflow-wrap:anywhere;}
+.ru-tutor-panel { max-width:680px; margin:18px auto 24px; padding:16px; border:1px solid var(--divider,#ddd); border-radius:14px; background:var(--card-bg,#fff); color:var(--text-fg,#222); font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; text-align:left; box-sizing:border-box; }
+.ru-tutor-heading { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+.ru-model-label { font-size:12px; color:var(--text-fg-faint,#666); }
+.ru-tutor-status { font-size:13px; color:var(--text-fg-faint,#666); margin:8px 0; }
+.ru-chat-log { max-height:310px; overflow-y:auto; overscroll-behavior:contain; -webkit-overflow-scrolling:touch; }
+.ru-bubble { padding:10px 12px; margin:8px 0; border-radius:10px; white-space:pre-wrap; overflow-wrap:anywhere; }
+.ru-user { background:var(--tag-bg,#f1f3f5); margin-left:22px; }
+.ru-assistant { border:1px solid var(--divider,#ddd); margin-right:8px; }
+.ru-composer { display:flex; align-items:flex-end; gap:8px; margin-top:10px; }
+.ru-question,.ru-pair-code { min-width:0; width:100%; box-sizing:border-box; padding:10px; border:1px solid var(--divider,#bbb); border-radius:9px; color:var(--text-fg,#222); background:var(--card-bg,#fff); font:16px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif; -webkit-user-select:text; user-select:text; }
+.ru-question { resize:vertical; }
+.ru-button { min-height:42px; border:1px solid var(--divider,#ddd); border-radius:9px; padding:7px 12px; background:var(--tag-bg,#f1f3f5); color:var(--text-fg,#222); font:inherit; cursor:pointer; touch-action:manipulation; }
+.ru-button:disabled { opacity:.5; }
+.ru-composer>.ru-button { background:#4b47bd; color:white; }
+.ru-shortcuts { display:flex; flex-wrap:wrap; gap:6px; margin:10px 0; }
+.ru-shortcuts .ru-button,.ru-reconnect { font-size:12px; }
+.ru-pairing { display:flex; gap:8px; }
+.ru-tutor-panel [hidden] { display:none !important; }
+.ru-align-button { font-size:13px; margin-right:8px; }
+.ru-reconnect { border:none; background:transparent; }
+/* Chat-first companion UI. Card color rules below stay independent. */
+.ru-tutor-panel {--luna-surface:#fff;--luna-soft:#f7f7fc;--luna-line:#e8e8f2;--luna-text:#252438;--luna-muted:#77758c;--luna-accent:#6e55d8;--luna-tint:#f0ebff;max-width:740px;padding:0;border:1px solid var(--luna-line);border-radius:20px;background:var(--luna-surface);color:var(--luna-text);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;box-shadow:0 6px 24px #26213d08;overflow:hidden;}
+.night_mode .ru-tutor-panel,.nightMode .ru-tutor-panel {--luna-surface:#24242b;--luna-soft:#2c2c36;--luna-line:#3c3b48;--luna-text:#f0eef8;--luna-muted:#aaa7ba;--luna-accent:#b09bff;--luna-tint:#373045;}
+.ru-tutor-heading {padding:15px 16px;border-bottom:1px solid var(--luna-line);gap:8px;}
+.ru-brand {display:flex;align-items:center;gap:10px;min-width:0;}
+.ru-avatar {display:grid;place-items:center;flex:none;width:35px;height:35px;border-radius:12px;background:var(--luna-tint);color:var(--luna-accent);font-size:26px;}
+.ru-brand-text {display:flex;flex-direction:column;min-width:0;}
+.ru-brand-text strong {font-size:16px;letter-spacing:-.3px;}
+.ru-brand-caption {font-size:10px;color:var(--luna-muted);white-space:nowrap;}
+.ru-header-actions {display:flex;align-items:center;gap:4px;}
+.ru-tutor-panel .ru-button {min-height:38px;border:1px solid var(--luna-line);border-radius:11px;background:var(--luna-surface);color:var(--luna-text);padding:8px 12px;font:inherit;box-shadow:none;text-transform:none;letter-spacing:normal;}
+.ru-tutor-panel .ru-button:hover {background:var(--luna-soft);}
+.ru-tutor-panel .ru-icon-button {min-width:32px;min-height:36px;width:32px;padding:4px;border:0;background:transparent;font-size:18px;color:var(--luna-muted);}
+.ru-tutor-panel .ru-connection-badge {min-height:27px;padding:3px 8px;font-size:10px;border:0;background:var(--luna-soft);color:var(--luna-muted);border-radius:20px;white-space:nowrap;}
+.ru-connection-badge[data-state="online"]::before {content:'●';color:#39a875;font-size:9px;margin-right:4px;}
+.ru-tutor-panel .ru-connection-badge[data-state="unpaired"] {background:var(--luna-tint);color:var(--luna-accent);}
+.ru-tutor-content {padding:0 16px 12px;}
+.ru-card-context {display:flex;align-items:center;gap:8px;padding:11px 0;font-size:11px;border-bottom:1px solid var(--luna-line);}
+.ru-card-context>span:first-child {color:var(--luna-muted);font-size:9px;letter-spacing:.9px;}
+.ru-card-context strong {font-size:13px;}
+.ru-colors-badge {margin-left:auto;font-size:9px;color:var(--luna-muted);}
+.ru-tutor-panel .ru-tutor-status {font-size:11px;line-height:1.45;color:var(--luna-muted);margin:9px 0;overflow-wrap:anywhere;}
+.ru-tutor-status:empty {display:none;}
+.ru-chat-log {min-height:120px;max-height:330px;padding:8px 0;}
+.ru-welcome {text-align:center;padding:17px 12px 13px;}
+.ru-welcome-icon {display:block;font-size:30px;color:var(--luna-accent);}
+.ru-welcome h3 {font-size:17px;margin:5px 0 7px;font-weight:650;letter-spacing:-.35px;color:var(--luna-text);}
+.ru-welcome p {font-size:12px;line-height:1.6;color:var(--luna-muted);max-width:280px;margin:0 auto;}
+.ru-bubble {font-size:13px;line-height:1.7;padding:11px 13px;border:0;border-radius:14px;}
+.ru-user {background:var(--luna-tint);margin-left:28px;color:var(--luna-text);}
+.ru-assistant {background:var(--luna-soft);margin-right:16px;}
+.ru-message-author {display:block;font-weight:650;font-size:10px;line-height:1.4;margin-bottom:5px;color:var(--luna-muted);}
+.ru-shortcuts {gap:6px;flex-wrap:wrap;margin:8px 0 12px;}
+.ru-tutor-panel .ru-shortcuts .ru-button {font-size:11px;border-radius:20px;min-height:32px;padding:5px 10px;}
+.ru-composer {align-items:flex-end;gap:5px;background:var(--luna-soft);border:1px solid var(--luna-line);border-radius:16px;padding:7px 8px 7px 11px;margin:0;}
+.ru-tutor-panel .ru-question,.ru-tutor-panel .ru-pair-code {font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--luna-text);background:var(--luna-soft);border:1px solid var(--luna-line);border-radius:12px;outline:none;}
+.ru-tutor-panel .ru-question:focus,.ru-tutor-panel .ru-pair-code:focus {border-color:var(--luna-accent);}
+.ru-composer .ru-question {font-size:16px;border:0;background:transparent;resize:none;padding:5px 0;max-height:130px;min-height:48px;box-shadow:none;}
+.ru-question::placeholder,.ru-pair-code::placeholder {color:var(--luna-muted);opacity:1;}
+.ru-tutor-panel .ru-composer>.ru-button {flex:none;min-height:34px;width:34px;padding:0;border:0;border-radius:11px;background:var(--luna-accent);color:var(--luna-surface);font-size:23px;}
+.ru-chat-footer {font-size:9px;text-align:center;color:var(--luna-muted);padding:8px 0 0;}
+.ru-settings {border:0;margin:0;padding:10px 0;}
+.ru-settings h3,.ru-connect-view h3 {font-size:19px;letter-spacing:-.3px;margin:9px 0 12px;color:var(--luna-text);}
+.ru-settings p,.ru-connect-view p,.ru-field-label {font-size:12px;color:var(--luna-muted);}
+.ru-field-label {display:block;margin:14px 0 6px;font-weight:600;}
+.ru-memory-toggle {font-size:12px;line-height:1.5;}
+.ru-tutor-panel .ru-back-button {background:transparent;border:0;padding:5px 0;font-size:11px;color:var(--luna-accent);}
+.ru-connect-view {padding:10px 0;}
+.ru-help {line-height:1.6;}
+.ru-pairing {margin:18px 0;}
+.ru-tutor-panel .ru-pair-code {letter-spacing:2px;text-align:center;}
+.ru-connection-details {margin-top:18px;font-size:11px;color:var(--luna-muted);overflow-wrap:anywhere;}
+.ru-connection-details summary {cursor:pointer;}
+.ru-tutor-panel .ru-reconnect {margin-top:12px;color:var(--luna-muted);border:0;font-size:10px;background:transparent;}
+.ru-thinking .ru-chat-footer::after {content:' · Thinking…';color:var(--luna-accent);}
+.ru-launcher {display:none;}
+.ru-pane-tabs {display:flex;gap:4px;padding:9px 0 4px;flex:none;}
+.ru-tutor-panel .ru-pane-tab {border:0;border-radius:8px;font-size:11px;padding:6px 13px;min-height:32px;color:var(--luna-muted);}
+.ru-tutor-panel .ru-pane-tab[aria-pressed="true"] {background:var(--luna-tint);color:var(--luna-accent);font-weight:600;}
+.ru-vocabulary {min-height:0;overflow:auto;padding:4px 0;}
+.ru-vocabulary h3 {font-size:18px;margin:10px 0 5px;color:var(--luna-text);}
+.ru-vocab-search {width:100%;box-sizing:border-box;padding:10px;border:1px solid var(--luna-line);border-radius:11px;background:var(--luna-soft);color:var(--luna-text);font-size:16px;}
+.ru-vocab-filters {display:flex;gap:4px;flex-wrap:wrap;padding:10px 0;}
+.ru-tutor-panel .ru-vocab-filters .ru-button {font-size:10px;padding:5px 9px;min-height:30px;border-radius:20px;}
+.ru-tutor-panel .ru-vocab-filters .ru-button[aria-pressed="true"] {background:var(--luna-tint);color:var(--luna-accent);border-color:var(--luna-accent);}
+.ru-tutor-panel .ru-word-row {display:flex;align-items:center;justify-content:space-between;width:100%;gap:12px;text-align:left;padding:11px 0;border:0;border-bottom:1px solid var(--luna-line);border-radius:0;}
+.ru-word-text {display:flex;flex-direction:column;min-width:0;}
+.ru-word-text strong {font-size:15px;color:var(--ru-target-red,#c62828);}
+.ru-word-text>span {font-size:12px;color:var(--luna-muted);}
+.ru-rating {font-size:9px;border-radius:6px;padding:4px 7px;white-space:nowrap;}
+.ru-rating-1 {background:#f8e2e3;color:#95343b;}.ru-rating-2 {background:#fff0d0;color:#875b0b;}.ru-rating-3 {background:#dff2e7;color:#276b46;}.ru-rating-4 {background:#e6eafa;color:#4f59a0;}
+.ru-example {border-bottom:1px solid var(--luna-line);padding:10px 0;}
+.ru-example-russian {font-size:14px;line-height:1.6;color:var(--luna-text);margin:0 0 5px;}
+.ru-example-translation {font-size:12px;line-height:1.5;color:var(--luna-muted);margin:0;}
+@media(min-width:960px){
+ body.ru-tutor-open {padding-right:400px !important;box-sizing:border-box;}
+ .ru-tutor-host .ru-tutor-panel {position:fixed;z-index:10000;right:16px;top:16px;bottom:16px;width:368px;max-width:368px;margin:0;display:flex;flex-direction:column;visibility:hidden;pointer-events:none;transform:translateX(410px);box-shadow:0 8px 35px #15102420;}
+ body.ru-tutor-open .ru-tutor-panel {visibility:visible;pointer-events:auto;transform:none;}
+ .ru-tutor-host .ru-tutor-heading {flex:none;}
+ .ru-tutor-host .ru-tutor-content {flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;}
+ .ru-tutor-host .ru-chat-view {display:flex;flex:1;min-height:0;flex-direction:column;}
+ .ru-tutor-host .ru-chat-log {flex:1;min-height:100px;max-height:none;}
+ .ru-tutor-host .ru-shortcuts,.ru-tutor-host .ru-composer,.ru-tutor-host .ru-chat-footer,.ru-tutor-host .ru-card-context {flex:none;}
+ .ru-tutor-host .ru-launcher {display:block;position:fixed;right:20px;top:20px;z-index:9999;background:#6e55d8;border:0;color:white;border-radius:24px;padding:12px 18px;font:600 14px/1.4 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;box-shadow:0 4px 18px #4a34872b;}
+ body.ru-tutor-open .ru-launcher {display:none;}
+}
+@media(max-width:600px){.ru-tutor-host .ru-tutor-panel{margin:12px 0;padding:0}.ru-tutor-heading{padding:12px}.ru-tutor-content{padding:0 12px 10px}.ru-brand-caption{font-size:9px}.ru-tutor-panel .ru-connection-badge{font-size:9px;padding:3px 6px}.ru-tutor-panel .ru-icon-button{width:28px;min-width:28px}.ru-chat-log{max-height:280px}.ru-welcome{padding:12px 8px}.ru-brand{gap:7px}}
+/* Study desk: restrained adaptation of the user's yuvdevstudio brutal theme.
+   Ink borders, cyan/yellow accents, modest offsets; no remote font dependency. */
+.ru-tutor-panel {--luna-surface:#fffefa;--luna-soft:#f2f1eb;--luna-line:#d8d7ce;--luna-text:#20201e;--luna-muted:#66665f;--luna-accent:#242422;--luna-tint:#f6e78e;--desk-ink:#282825;--desk-cyan:#b7eaf0;--desk-yellow:#f6e78e;border:1.5px solid var(--desk-ink);border-radius:9px;box-shadow:3px 3px 0 var(--desk-ink);font-size:15px;}
+.night_mode .ru-tutor-panel,.nightMode .ru-tutor-panel {--luna-surface:#20211f;--luna-soft:#2a2c28;--luna-line:#43463f;--luna-text:#f3f2e9;--luna-muted:#b4b7ac;--luna-accent:#f3f2e9;--luna-tint:#41432b;--desk-ink:#a6aa9d;--desk-cyan:#314849;--desk-yellow:#44462c;}
+.ru-tutor-host .ru-tutor-heading {padding:17px 18px;border-bottom:1.5px solid var(--desk-ink);}
+.ru-tutor-host .ru-avatar {width:37px;height:40px;background:var(--desk-cyan);border:1.5px solid var(--desk-ink);border-radius:5px;color:var(--luna-text);font:bold 25px/1 ui-monospace,Consolas,monospace;box-shadow:2px 2px 0 var(--desk-ink);}
+.ru-tutor-host .ru-brand {gap:12px;}
+.ru-tutor-host .ru-brand-text strong {font-size:24px;line-height:1.2;font-weight:800;letter-spacing:-1px;}
+.ru-tutor-host .ru-brand-caption {font:9px/1.6 ui-monospace,Consolas,monospace;text-transform:uppercase;letter-spacing:.6px;}
+.ru-tutor-host .ru-button {border-radius:5px;}
+.ru-tutor-host .ru-icon-button {border:1px solid var(--luna-line);border-radius:5px;min-height:35px;color:var(--luna-text);}
+.ru-tutor-host .ru-connection-badge {border:0;background:transparent;font:10px/1.4 ui-monospace,Consolas,monospace;padding:5px;}
+.ru-tutor-host .ru-tutor-content {padding:0 18px 14px;}
+.ru-tutor-host .ru-pane-tabs {display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:14px 0 10px;}
+.ru-tutor-host .ru-pane-tab {border:1px solid var(--luna-line);border-radius:5px;min-height:38px;font-size:13px;font-weight:650;color:var(--luna-text);}
+.ru-tutor-host .ru-pane-tab[aria-pressed="true"] {border:1.5px solid var(--desk-ink);background:var(--desk-yellow);color:var(--luna-text);box-shadow:1px 2px 0 var(--desk-ink);}
+.ru-tutor-host .ru-card-context {border:1px solid var(--luna-line);background:var(--luna-soft);padding:9px 10px;margin:3px 0 10px;border-radius:4px;}
+.ru-tutor-host .ru-card-context>span:first-child {font:10px ui-monospace,Consolas,monospace;letter-spacing:.3px;}
+.ru-tutor-host .ru-card-context strong {font-size:15px;}
+.ru-tutor-host .ru-colors-badge {font-size:10px;}
+.ru-tutor-host .ru-welcome {text-align:left;padding:32px 7px 24px;}
+.ru-tutor-host .ru-welcome-icon {font:10px/1.6 ui-monospace,Consolas,monospace;letter-spacing:.9px;color:var(--luna-muted);}
+.ru-tutor-host .ru-welcome h3 {font-size:29px;font-weight:750;letter-spacing:-1px;margin:11px 0;}
+.ru-tutor-host .ru-welcome p {margin:0;font-size:14px;line-height:1.7;max-width:300px;}
+.ru-tutor-host .ru-bubble {font-size:14px;line-height:1.75;border:1px solid var(--luna-line);border-radius:6px;padding:13px 14px;margin-top:12px;margin-bottom:12px;}
+.ru-tutor-host .ru-user {background:var(--desk-cyan);border-color:var(--desk-ink);margin-left:26px;}
+.ru-tutor-host .ru-assistant {background:var(--luna-surface);margin-right:8px;border-left:3px solid var(--desk-ink);}
+.ru-tutor-host .ru-message-author {font:10px/1.5 ui-monospace,Consolas,monospace;text-transform:uppercase;letter-spacing:.5px;margin-bottom:7px;}
+.ru-tutor-host .ru-shortcuts {gap:6px;margin:12px 0;}
+.ru-tutor-host .ru-shortcuts .ru-button {border:1px solid var(--luna-line);border-radius:4px;font-size:11px;padding:7px 9px;min-height:35px;background:var(--luna-surface);}
+.ru-tutor-host .ru-composer {background:var(--luna-surface);border:1.5px solid var(--desk-ink);border-radius:6px;box-shadow:2px 2px 0 var(--desk-ink);padding:10px;}
+.ru-tutor-host .ru-composer .ru-question {background:transparent;color:var(--luna-text);min-height:55px;}
+.ru-tutor-host .ru-composer>.ru-button {background:var(--desk-cyan);border:1.5px solid var(--desk-ink);border-radius:4px;color:var(--luna-text);height:36px;width:36px;}
+.ru-tutor-host .ru-chat-footer {font:10px/1.5 ui-monospace,Consolas,monospace;padding-top:12px;}
+.ru-tutor-host .ru-tutor-status {font-size:12px;}
+.ru-tutor-host .ru-settings h3,.ru-tutor-host .ru-connect-view h3,.ru-tutor-host .ru-vocabulary h3 {font-size:23px;font-weight:750;letter-spacing:-.7px;}
+.ru-tutor-host .ru-settings p,.ru-tutor-host .ru-connect-view p,.ru-tutor-host .ru-field-label,.ru-tutor-host .ru-memory-toggle {font-size:13px;line-height:1.6;}
+.ru-tutor-host .ru-settings .ru-question,.ru-tutor-host .ru-pair-code,.ru-tutor-host .ru-vocab-search {border:1px solid var(--desk-ink);border-radius:5px;padding:11px;}
+.ru-tutor-host .ru-settings>.ru-button {border:1px solid var(--desk-ink);font-size:12px;}
+.ru-tutor-host .ru-button:focus-visible,.ru-tutor-host input:focus-visible,.ru-tutor-host textarea:focus-visible,.ru-tutor-host summary:focus-visible {outline:2px solid var(--desk-ink);outline-offset:3px;}
+.ru-vocab-overview {display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:16px 0;}
+.ru-vocab-stat {border:1px solid var(--desk-ink);border-radius:5px;padding:12px;background:var(--luna-soft);}
+.ru-vocab-stat:first-child {background:var(--desk-yellow);}
+.ru-vocab-stat strong {display:block;font-size:29px;line-height:1.2;font-weight:750;letter-spacing:-1px;}
+.ru-vocab-stat>span {display:block;margin-top:5px;font:9px/1.5 ui-monospace,Consolas,monospace;letter-spacing:.4px;}
+.ru-tutor-host .ru-vocab-filters {gap:5px;padding:13px 0;}
+.ru-tutor-host .ru-vocab-filters .ru-button {padding:5px 7px;border-radius:4px;font:10px ui-monospace,Consolas,monospace;min-height:33px;}
+.ru-tutor-host .ru-vocab-filters .ru-button[aria-pressed="true"] {background:var(--desk-yellow);border-color:var(--desk-ink);color:var(--luna-text);}
+.ru-tutor-host .ru-word-row {padding:14px 3px;border-radius:0;}
+.ru-tutor-host .ru-word-text strong {font-size:17px;}
+.ru-tutor-host .ru-word-text>span {font-size:13px;line-height:1.5;margin-top:3px;}
+.ru-tutor-host .ru-rating {border:1px solid currentColor;border-radius:4px;font:10px ui-monospace,Consolas,monospace;}
+.ru-tutor-host .ru-vocab-help {font-size:11px;color:var(--luna-muted);border-top:1px solid var(--luna-line);padding:12px 0;}
+.ru-vocab-help summary {cursor:pointer;}
+.ru-tutor-host .ru-example-russian {font-size:16px;}
+.ru-tutor-host .ru-example-translation {font-size:14px;line-height:1.7;}
+@media(min-width:960px){body.ru-tutor-open{padding-right:428px !important}.ru-tutor-host .ru-tutor-panel{width:396px;max-width:396px;right:14px;top:14px;bottom:17px;box-shadow:3px 3px 0 var(--desk-ink)}.ru-tutor-host .ru-launcher{background:#f6e78e;color:#20201e;border:1.5px solid #282825;border-radius:5px;box-shadow:3px 3px 0 #282825;font-weight:700}}
+@media(max-width:600px){.ru-tutor-host .ru-tutor-panel{margin:14px 3px 20px 0;border-radius:7px}.ru-tutor-host .ru-tutor-heading{padding:14px 12px}.ru-tutor-host .ru-tutor-content{padding:0 12px 14px}.ru-tutor-host .ru-brand{gap:9px}.ru-tutor-host .ru-brand-text strong{font-size:22px}.ru-tutor-host .ru-brand-caption{font-size:8px;letter-spacing:.2px}.ru-tutor-host .ru-welcome{padding:23px 3px}.ru-tutor-host .ru-chat-log{max-height:330px}.ru-tutor-host .ru-bubble{font-size:14px}.ru-tutor-host .ru-connection-badge{font-size:9px}.ru-tutor-host .ru-shortcuts .ru-button{font-size:11px;padding:7px}.ru-tutor-host .ru-icon-button{width:28px;min-width:28px}}
+/* The vocabulary library is a full reviewer-page surface, not a narrow drawer. */
+.ru-tutor-panel,.ru-tutor-panel * {box-sizing:border-box;min-width:0;}
+.ru-tutor-panel {color-scheme:light;}
+.night_mode .ru-tutor-panel,.nightMode .ru-tutor-panel {color-scheme:dark;}
+.ru-tutor-panel ::-webkit-scrollbar {width:8px;height:8px;}
+.ru-tutor-panel ::-webkit-scrollbar-thumb {background:var(--luna-line);border-radius:4px;}
+.ru-tutor-panel ::-webkit-scrollbar-thumb:hover {background:var(--luna-muted);}
+.ru-tutor-panel p,.ru-tutor-panel h2,.ru-tutor-panel h3,.ru-tutor-panel button {overflow-wrap:anywhere;}
+body.ru-library-open {overflow:hidden !important;}
+.ru-tutor-host .ru-tutor-panel.ru-library-open {position:fixed !important;inset:0 !important;width:100% !important;max-width:none !important;height:100% !important;max-height:none !important;margin:0 !important;padding:0 !important;border:0;border-radius:0;box-shadow:none;transform:none !important;visibility:visible !important;pointer-events:auto !important;z-index:100000;display:flex;flex-direction:column;overflow:hidden;}
+.ru-library-open .ru-tutor-heading,.ru-library-open .ru-pane-tabs {display:none !important;}
+.ru-tutor-host .ru-library-open .ru-tutor-content {padding:0;flex:1;min-height:0;display:flex;overflow:hidden;}
+.ru-tutor-host .ru-library-open .ru-vocabulary {display:flex;flex-direction:column;flex:1;min-height:0;width:100%;padding:0;overflow:hidden;text-align:left;}
+.ru-library-header {display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:28px;flex:none;padding:22px 30px;border-bottom:1.5px solid var(--desk-ink);background:var(--luna-surface);}
+.ru-tutor-host .ru-library-header>.ru-button {border:1px solid var(--desk-ink);font-size:13px;min-height:42px;padding:10px 14px;white-space:nowrap;}
+.ru-library-title>span {font:10px/1.6 ui-monospace,Consolas,monospace;letter-spacing:1px;color:var(--luna-muted);}
+.ru-tutor-host .ru-library-title h2 {font-size:30px;line-height:1.2;letter-spacing:-1px;margin:4px 0 0;color:var(--luna-text);}
+.ru-library-header .ru-vocab-overview {margin:0;gap:10px;min-width:220px;}
+.ru-library-header .ru-vocab-stat {padding:10px 15px;min-width:104px;}
+.ru-library-header .ru-vocab-stat strong {font-size:24px;}
+.ru-library-body {position:relative;display:grid;grid-template-columns:minmax(280px,360px) minmax(0,1fr);flex:1;min-height:0;overflow:hidden;}
+.ru-library-directory {display:flex;flex-direction:column;min-height:0;min-width:0;padding:22px 20px 12px;border-right:1px solid var(--luna-line);overflow:hidden;}
+.ru-tutor-host .ru-library-directory .ru-vocab-search {flex:none;font-size:16px;width:100%;max-width:100%;}
+.ru-library-directory .ru-vocab-filters {flex:none;}
+.ru-library-directory .ru-vocab-list {flex:1;min-height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;padding-right:6px;}
+.ru-tutor-host .ru-library-directory .ru-word-row {width:100%;max-width:100%;min-height:72px;padding:12px 9px;gap:12px;border-radius:5px;}
+.ru-tutor-host .ru-library-directory .ru-word-row[aria-pressed="true"] {background:var(--desk-cyan);outline:1px solid var(--desk-ink);outline-offset:-1px;}
+.ru-library-directory .ru-word-text {flex:1;min-width:0;}
+.ru-library-directory .ru-word-text>span {overflow-wrap:anywhere;}
+.ru-library-directory .ru-rating {flex:none;}
+.ru-library-directory>.ru-help {font-size:10px;line-height:1.5;flex:none;margin:12px 0 0;color:var(--luna-muted);}
+.ru-library-directory .ru-vocab-help {flex:none;margin-top:8px;max-height:160px;overflow:auto;padding:8px 0;}
+.ru-tutor-host .ru-library-open .ru-vocab-detail {display:block;min-width:0;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;padding:30px clamp(22px,4vw,70px) 60px;}
+.ru-tutor-host .ru-library-open .ru-vocab-detail>h3 {font-size:36px;line-height:1.2;margin:0 0 8px;letter-spacing:-1px;}
+.ru-vocab-detail>.ru-help {margin:6px 0 16px;font-size:14px;color:var(--luna-muted);}
+.ru-tutor-host .ru-library-pair {padding:23px 0;border-bottom:1px solid var(--luna-line);max-width:960px;}
+.ru-tutor-host .ru-library-pair .ru-example-russian {font-size:21px;line-height:1.8;margin:0 0 9px;color:var(--luna-text);}
+.ru-tutor-host .ru-library-pair .ru-example-translation {font-size:18px;line-height:1.8;margin:0;color:var(--luna-muted);}
+.ru-example-color-status {display:block;font:10px/1.5 ui-monospace,Consolas,monospace;color:var(--luna-muted);margin-top:13px;}
+.ru-vocab-hit {font-weight:750;background:var(--desk-yellow);border-radius:2px;border-bottom:2px solid currentColor;}
+.ru-vocab-hit:not([data-color]) {color:var(--ru-target-red,#c62828);}
+.ru-tutor-host .ru-word-list-back {display:none;}
+@media(max-width:760px){
+ .ru-library-header{padding:14px 16px;gap:16px;grid-template-columns:auto minmax(0,1fr)}
+ .ru-library-header .ru-vocab-overview{display:none}
+ .ru-tutor-host .ru-library-title h2{font-size:25px}
+ .ru-library-title>span{font-size:8px;letter-spacing:.5px}
+ .ru-tutor-host .ru-library-header>.ru-button{padding:8px 10px;font-size:12px;min-height:40px}
+ .ru-library-body{display:flex;flex-direction:column}
+ .ru-library-directory{flex:1;width:100%;border-right:0;padding:16px}
+ .ru-tutor-host .ru-library-open .ru-vocab-detail{display:none;flex:1;width:100%;padding:20px 20px 50px}
+ .ru-library-detail-open .ru-library-directory{display:none}
+ .ru-tutor-host .ru-library-open .ru-library-detail-open .ru-vocab-detail{display:block}
+ .ru-tutor-host .ru-word-list-back{display:inline-block;margin:0 0 20px;font-size:14px;min-height:40px}
+ .ru-tutor-host .ru-library-open .ru-vocab-detail>h3{font-size:31px}
+ .ru-tutor-host .ru-library-pair .ru-example-russian{font-size:19px}
+ .ru-tutor-host .ru-library-pair .ru-example-translation{font-size:17px}
+}
+.ru-setting-section {font-size:16px;font-weight:750;border-top:1px solid var(--luna-line);padding-top:18px;margin:24px 0 10px;color:var(--luna-text);}
+.ru-word-navigation {display:flex;gap:8px;grid-column:1/-1;}
+.ru-selected-form-label {font:10px/1.5 ui-monospace,Consolas,monospace;letter-spacing:1px;color:var(--luna-muted);margin:0 0 6px;}
+.ru-base-word {font-size:15px;margin:8px 0;color:var(--luna-text);}
+.ru-base-word>span {color:var(--luna-muted);}
+.ru-selected-sentence {margin:12px 0;padding:12px;border-left:3px solid var(--desk-ink);background:var(--luna-soft);line-height:1.7;}
+.ru-selected-sentence p {margin:4px 0;}
+.ru-word-navigation .ru-button {min-height:36px;padding:5px 12px;font-size:12px;}
+.ru-lookup-word {cursor:pointer;border-radius:2px;}
+.ru-lookup-word:hover,.ru-lookup-word:focus-visible {background:var(--desk-yellow,#fff0ae);outline:1px dotted currentColor;}
+.ru-example-actions {display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:16px;}
+.ru-example-actions>.ru-button {font-size:12px;}
+.ru-example-audio {width:280px;max-width:100%;height:40px;}
+.ru-library-chat {display:flex;flex-direction:column;min-width:0;min-height:0;padding:18px;border-left:1px solid var(--luna-line);background:var(--luna-surface,var(--card-bg,#fff));overflow:hidden;}
+.ru-library-chat-header {display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px;}
+.ru-library-chat-header .ru-button {font-size:12px;}
+.ru-tutor-host .ru-library-chat .ru-chat-view {display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;}
+.ru-tutor-host .ru-library-chat .ru-chat-log {flex:1;min-height:70px;max-height:none;overflow:auto;}
+.ru-library-chat .ru-shortcuts {flex-wrap:wrap;}
+.ru-library-chat .ru-question {max-height:130px;}
+.ru-library-chat .ru-card-context,.ru-library-chat .ru-composer,.ru-library-chat .ru-chat-footer {flex-shrink:0;}
+.ru-chat-excerpt {max-height:150px;overflow:auto;border-left:3px solid var(--desk-ink);padding:0 10px;margin:10px 0;font-size:14px;}
+.ru-chat-excerpt p {margin:4px 0;}
+.ru-library-chat-open .ru-library-body {grid-template-columns:240px minmax(0,1fr) 360px;}
+.ru-tutor-host .ru-library-chat-open .ru-vocab-detail {padding:24px;}
+@media(max-width:1100px){
+ .ru-library-chat-open .ru-library-body{grid-template-columns:minmax(240px,320px) minmax(0,1fr)}
+ .ru-library-chat-open .ru-library-chat{position:absolute;right:0;top:0;bottom:0;width:390px;max-width:100%;z-index:3;box-shadow:-4px 0 14px #0002}
+}
+@media(max-width:760px){
+ .ru-library-chat-open .ru-library-chat{inset:0;width:100%;border:0;padding:14px}
+ .ru-library-chat-open .ru-library-directory,.ru-tutor-host .ru-library-open .ru-library-chat-open .ru-vocab-detail{display:none}
+ .ru-tutor-host .ru-library-chat .ru-chat-log{max-height:none}
+ .ru-example-actions{align-items:stretch;flex-direction:column}
+ .ru-example-audio{width:100%}
+ .ru-word-navigation{gap:6px}
+ .ru-library-header{row-gap:8px}
+}
+.ru-memory-note {background:var(--luna-soft);border:1px solid var(--luna-line);border-radius:5px;padding:10px 12px;margin:8px 0;overflow-wrap:anywhere;}
+.ru-memory-note p {margin:0;font-size:13px;line-height:1.6;}
+.ru-memory-note details {margin-top:8px;font-size:11px;color:var(--luna-muted);}
+.ru-aligned { cursor:pointer; border-bottom:1px dotted currentColor; }
+.ru-aligned-focus { background:#ffe59c !important; color:#222 !important; border-radius:3px; outline:2px solid #dbad32; }
+.ru-color-0 { color:var(--ru-target-red,#c62828) !important; }
+.ru-color-1 { color:#1263ad !important; }
+.ru-color-2 { color:#26723d !important; }
+.ru-color-3 { color:#7a3da0 !important; }
+.ru-color-4 { color:#91600b !important; }
+.ru-color-5 { color:#007b80 !important; }
+.ru-color-6 { color:#b03578 !important; }
+.ru-color-7 { color:#5752ad !important; }
+.ru-color-8 { color:#8a4b25 !important; }
+.ru-color-9 { color:#536c16 !important; }
+.ru-color-10 { color:#536a8c !important; }
+.ru-color-11 { color:#a34343 !important; }
+.night_mode .ru-color-1,.nightMode .ru-color-1 { color:#81bfff !important; }
+.night_mode .ru-color-2,.nightMode .ru-color-2 { color:#86d896 !important; }
+.night_mode .ru-color-3,.nightMode .ru-color-3 { color:#d3a6f1 !important; }
+.night_mode .ru-color-4,.nightMode .ru-color-4 { color:#e9c77a !important; }
+.night_mode .ru-color-5,.nightMode .ru-color-5 { color:#79d7dc !important; }
+.night_mode .ru-color-6,.nightMode .ru-color-6 { color:#ef9ecb !important; }
+.night_mode .ru-color-7,.nightMode .ru-color-7 { color:#b1abff !important; }
+.night_mode .ru-color-8,.nightMode .ru-color-8 { color:#e3b191 !important; }
+.night_mode .ru-color-9,.nightMode .ru-color-9 { color:#bcd978 !important; }
+.night_mode .ru-color-10,.nightMode .ru-color-10 { color:#abc1e4 !important; }
+.night_mode .ru-color-11,.nightMode .ru-color-11 { color:#eaa6a6 !important; }
+@media(max-width:600px){.ru-tutor-panel{margin:12px 0;padding:12px}.ru-chat-log{max-height:260px}}

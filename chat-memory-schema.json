@@ -1,0 +1,19 @@
+{
+  "type":"object","additionalProperties":false,
+  "properties":{
+    "answer":{"type":"string"},
+    "automaticUpdates":{
+      "type":"object","additionalProperties":false,
+      "properties":{
+        "memory":{"type":"array","items":{"$ref":"#/$defs/note"}},
+        "selfInstructions":{"type":"array","items":{"$ref":"#/$defs/note"}},
+        "forgetMemoryKeys":{"type":"array","items":{"$ref":"#/$defs/removal"}},
+        "forgetSelfInstructionKeys":{"type":"array","items":{"$ref":"#/$defs/removal"}}
+      },"required":["memory","selfInstructions","forgetMemoryKeys","forgetSelfInstructionKeys"]
+    }
+  },"required":["answer","automaticUpdates"],
+  "$defs":{
+    "note":{"type":"object","additionalProperties":false,"properties":{"key":{"type":"string"},"text":{"type":"string"},"evidence":{"type":"string"}},"required":["key","text","evidence"]},
+    "removal":{"type":"object","additionalProperties":false,"properties":{"key":{"type":"string"},"evidence":{"type":"string"}},"required":["key","evidence"]}
+  }
+}
