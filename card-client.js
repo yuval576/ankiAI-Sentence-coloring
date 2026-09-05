@@ -336,6 +336,7 @@
     if(!settingsPanel.hidden)loadSettings();
   }
   function showView(view){
+    var tooltip=root.querySelector('.ru-word-tooltip');if(tooltip)tooltip.hidden=true;
     libraryChat.hidden=true;vocabView.classList.remove('ru-library-chat-open');
     if(view!=='vocabulary'){content.appendChild(chatView);libraryChat.hidden=true;vocabView.classList.remove('ru-library-chat-open');}
     chatView.hidden=view!=='chat';settingsPanel.hidden=view!=='settings';connectView.hidden=view!=='connect';vocabView.hidden=view!=='vocabulary';chatTab.setAttribute('aria-pressed',String(view==='chat'));vocabTab.setAttribute('aria-pressed',String(view==='vocabulary'));content.hidden=false;minimize.textContent='−';minimize.setAttribute('aria-expanded','true');
@@ -423,8 +424,18 @@
   function makeLookup(span,value,key,translation){
     var entries=dictionaryEntries(value,key);
     span.classList.add('ru-lookup-word','tappable');span.tabIndex=0;span.setAttribute('role','button');
-    var meaning=translation||entries.map(function(w){return w.word+' — '+w.translation;}).join('; ')||'No dictionary translation in this deck';
+    var dict=window.RuVocabularyDictionary,lemma=key||(dict&&dict.forms[normalizedWord(value)])||value;
+    var meaning='Base: '+(entries.map(function(w){return w.word+' — '+w.translation;}).join('; ')||lemma+' — no dictionary translation in this deck');
+    if(translation)meaning+='\nIn this sentence: '+translation;
     span.title=meaning;span.setAttribute('aria-label',value+': '+meaning+'. Open vocabulary');
+    function showTip(){
+      var tip=root.querySelector('.ru-word-tooltip');if(!tip){tip=el('div','ru-word-tooltip');tip.id='ru-word-tooltip';tip.setAttribute('role','tooltip');root.appendChild(tip);}
+      tip.textContent=meaning;tip.hidden=false;span.setAttribute('aria-describedby',tip.id);
+      var rect=span.getBoundingClientRect();tip.style.left=Math.max(8,Math.min(rect.left,window.innerWidth-tip.offsetWidth-8))+'px';
+      tip.style.top=Math.max(8,rect.top-tip.offsetHeight-8)+'px';
+    }
+    function hideTip(){var tip=root.querySelector('.ru-word-tooltip');if(tip)tip.hidden=true;span.removeAttribute('aria-describedby');}
+    span.addEventListener('mouseenter',showTip);span.addEventListener('mouseleave',hideTip);span.addEventListener('focus',showTip);span.addEventListener('blur',hideTip);span.addEventListener('click',hideTip);
     var lookup=function(event){event.preventDefault();event.stopPropagation();var pair=span.closest('.ru-library-pair'),sentence=span.closest('.ru-sentence-source');var sentenceText=pair?pair.querySelector('.ru-example-russian').textContent:sentence?sentence.textContent:'';pendingLookup={value:value,key:key,translation:translation,sentence:sentenceText.trim()};showView('vocabulary');if(vocabData)resolveLookup();else loadVocabulary();};
     span.addEventListener('click',lookup);span.addEventListener('keydown',function(event){if(event.key==='Enter'||event.key===' ')lookup(event);});
   }
@@ -466,6 +477,7 @@
     node.appendChild(document.createTextNode(value.slice(cursor)));
   }
   function showWordExamples(word,fromHistory){
+    var tooltip=root.querySelector('.ru-word-tooltip');if(tooltip)tooltip.hidden=true;
     stopVocabularyAudio();
     if(!fromHistory&&(!wordHistory[wordHistoryIndex]||wordHistory[wordHistoryIndex].word.id!==word.id||wordHistory[wordHistoryIndex].word.selectedForm!==word.selectedForm)){wordHistory=wordHistory.slice(0,wordHistoryIndex+1);wordHistory.push({word:word,query:vocabSearch.value,rating:vocabRating});if(wordHistory.length>100)wordHistory.shift();wordHistoryIndex=wordHistory.length-1;}
     previousWord.disabled=wordHistoryIndex<=0;nextWord.disabled=wordHistoryIndex>=wordHistory.length-1;
@@ -476,6 +488,18 @@
     vocabDetail.appendChild(el('h3','',word.selectedForm||word.word));
     var base=el('p','ru-base-word');base.appendChild(el('span','','Base form: '));base.appendChild(el('strong','',word.baseWord||word.word));vocabDetail.appendChild(base);
     vocabDetail.appendChild(el('p','ru-help',word.translation));
+    var dictionaryWord=dictionaryEntries(word.baseWord||word.word).find(function(w){return w.id===word.id;});
+    var grammar=word.verbDetails||(dictionaryWord&&dictionaryWord.verbDetails);
+    if(grammar){
+      var details=el('details','ru-word-grammar');details.appendChild(el('summary','','Word details · conjugations'));
+      details.appendChild(el('p','',grammar.aspect+' · '+grammar.conjugation+' conjugation'+(grammar.reflexive?' · reflexive':'')));
+      details.appendChild(el('p','',grammar.regularity.label));
+      details.appendChild(el('p','ru-help',grammar.regularity.scope));
+      var labels={'1sg':'я','2sg':'ты','3sg':'он / она','1pl':'мы','2pl':'вы','3pl':'они',m:'он',f:'она',n:'оно',pl:'plural',sg:'singular'};
+      Object.keys(grammar.forms).forEach(function(tense){var forms=grammar.forms[tense];if(!forms)return;details.appendChild(el('h4','',tense==='future'?'Future · '+grammar.future_kind:tense.charAt(0).toUpperCase()+tense.slice(1)));var table=el('table','ru-verb-table');Object.keys(forms).forEach(function(person){var row=el('tr');row.appendChild(el('th','',labels[person]||person));row.appendChild(el('td','',forms[person]||'Not available'));table.appendChild(row);});details.appendChild(table);});
+      details.appendChild(el('p','ru-help',grammar.stress));if(grammar.ambiguous)details.appendChild(el('p','ru-help','This spelling has multiple readings. Showing the dictionary infinitive '+grammar.lemma+'.'));
+      vocabDetail.appendChild(details);
+    }
     if(word.selectedExample){var selected=el('div','ru-selected-sentence');selected.appendChild(el('span','ru-selected-form-label','SELECTED SENTENCE'));var example=word.selectedExample;var text=el('p','ru-example-russian');renderExampleSentence(text,example.ru,example.ruTokens,word,new Set(),{text:example.en,tokens:example.enTokens},'ru');selected.appendChild(text);vocabDetail.appendChild(selected);}
     var askWord=button('Ask Luna about '+(word.selectedForm||word.word),function(){openVocabularyChat(word,word.selectedExample);});askWord.classList.add('ru-ask-word');vocabDetail.appendChild(askWord);
     vocabDetail.appendChild(el('p','ru-help',word.examples.length+' matching examples across the deck, including inflected forms.'));

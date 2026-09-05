@@ -4,7 +4,7 @@ import json,os,hashlib,unicodedata,re,html
 from datetime import datetime,timezone
 from persist_colors import soup,tokenize,ROOT,MODEL
 INDEX=ROOT/'vocabulary-example-index.json'
-INDEX_VERSION=5
+INDEX_VERSION=6
 
 def audio_files(value):
     """Local Anki sound filenames only; never URLs or traversal paths."""
@@ -54,6 +54,20 @@ def build_index(col):
     # environment need not install the optional dictionary dependency.
     previous=json.loads(INDEX.read_text(encoding='utf-8')) if INDEX.exists() else {}
     morph=None;lemmas=previous.get('lemmas',{});fallback=False
+    verb_cache=previous.get('verbDetails',{}) if previous.get('version')==INDEX_VERSION else {}
+    def verb_details(word):
+        nonlocal morph,fallback
+        key=norm(word)
+        if key not in verb_cache:
+            if morph is None and not fallback:
+                try:
+                    import pymorphy3
+                    morph=pymorphy3.MorphAnalyzer()
+                except ImportError:fallback=True
+            if morph is not None:
+                from verb_details import build_verb_details
+                verb_cache[key]=build_verb_details(word,morph)
+        return verb_cache.get(key)
     def lemma(word):
         nonlocal morph,fallback
         word=norm(word)
@@ -73,6 +87,7 @@ def build_index(col):
         fields=flds.split('\x1f');word=soup(fields[positions['Word']]).get_text().strip()
         ts=tokenize(word);word_keys[str(nid)]=[lemma(t[0]) for t in ts]
         dictionary.append({'id':str(nid),'word':word,'translation':soup(fields[positions['Translation']]).get_text().strip(),'keys':sorted(set(word_keys[str(nid)]+[norm(word)])),'rating':0})
+        dictionary[-1]['verbDetails']=verb_details(word)
         for i in range(1,5):
             groups={}
             ru,rt,ru_saved=sentence_tokens(fields[positions[f'Sentence {i}']],groups,lemma)
@@ -98,6 +113,7 @@ def build_index(col):
         if len(keys)==1:entry['examples']=sorted(set(inverted.get(keys[0],[])+inverted.get(norm(entry['word']),[])))
         else:entry['examples']=[i for i,e in enumerate(examples) if norm(entry['word']) in norm(e['ru'])]
     data={'version':INDEX_VERSION,'notesSignature':notes_signature(col,model['id']),'examples':examples,'index':inverted,'wordKeys':word_keys,'lemmas':lemmas,'dictionary':dictionary,'morphologyFallback':fallback}
+    data['verbDetails']=verb_cache
     INDEX.write_text(json.dumps(data,ensure_ascii=False,separators=(',',':')),encoding='utf-8')
     print(f'Indexed {len(examples)} unique sentence/translation pairs with inflected-word matching.',flush=True)
     return data

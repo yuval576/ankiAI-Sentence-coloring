@@ -12,6 +12,8 @@ This is a **Windows-first personal prototype**, not an official Anki or OpenAI p
 - Click a Russian word, see the selected form and dictionary/base form, and move Back/Forward through selections. Stored morphological mappings handle conjugated verbs and declined nouns; ambiguous forms are not perfect contextual analyses.
 - Hover for the saved sentence translation or a dictionary meaning. On phones, tap to open the entry. Unavailable meanings are labeled rather than invented.
 - Listen to existing deck recordings inside vocabulary. No automatic playback, generated speech, or external audio service.
+- Hover a Russian sentence word for its base-form dictionary meaning, separately from the sentence-specific translation. Click to open the vocabulary entry.
+- Expand Word details for cached verb paradigms, aspect and qualified regularity notes. Forms come from the offline pymorphy3 dictionary, not AI. Stress is not marked; ambiguous readings and unavailable forms are flagged. I/II endings do not imply an entirely regular stem.
 - Ask Luna about a selected word or exact example without leaving vocabulary. Vocabulary chats are separate from review-card threads.
 - Three personalization sections: your instructions, automatically selected chat memory, and the tutor's own lower-priority teaching guidance.
 
@@ -85,6 +87,8 @@ Check `batch-colors-report.json` or `run-coloring.ps1 -Status` for current state
 npm test
 .\.venv\Scripts\python.exe test-coloring-export.py
 .\.venv\Scripts\python.exe test-vocabulary-colors.py
+.\.venv\Scripts\python.exe test-verb-details.py
+.\.venv\Scripts\python.exe test-vocabulary-grammar.py
 ```
 
 These use synthetic fixtures and fake providers. `test-automatic-memory.mjs --live` is explicitly opt-in and uses account allowance. Native iPhone/desktop rendering and audible playback still need testing on each installation; automated DOM/data checks are not a substitute for that.

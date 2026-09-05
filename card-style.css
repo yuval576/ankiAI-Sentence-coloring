@@ -295,3 +295,10 @@ body.ru-library-open {overflow:hidden !important;}
 .night_mode .ru-color-10,.nightMode .ru-color-10 { color:#abc1e4 !important; }
 .night_mode .ru-color-11,.nightMode .ru-color-11 { color:#eaa6a6 !important; }
 @media(max-width:600px){.ru-tutor-panel{margin:12px 0;padding:12px}.ru-chat-log{max-height:260px}}
+.ru-word-tooltip{position:fixed;z-index:100010;max-width:min(340px,calc(100vw - 32px));padding:12px 16px;border:2px solid #171b20;border-radius:10px;background:#fff7cd;color:#171b20;box-shadow:3px 3px 0 #171b20;font:16px/1.5 system-ui,sans-serif;white-space:pre-line;pointer-events:none;text-align:left}
+.ru-word-tooltip[hidden]{display:none!important}
+.ru-sentence-source .ru-lookup-word{pointer-events:auto;cursor:help}
+.ru-word-grammar{margin:16px 0;padding:14px;border:1px solid currentColor;border-radius:10px;text-align:left}
+.ru-word-grammar summary{cursor:pointer;font-weight:700}
+.ru-verb-table{width:100%;border-collapse:collapse;font-size:16px}
+.ru-verb-table th,.ru-verb-table td{padding:6px 10px;text-align:left;border-bottom:1px solid #8885}
