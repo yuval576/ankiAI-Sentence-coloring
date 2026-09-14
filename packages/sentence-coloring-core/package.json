@@ -1,0 +1,9 @@
+{
+  "name": "@yuval576/sentence-coloring-core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Safe token alignment validation and HTML rendering for bilingual sentence coloring.",
+  "exports": "./src/index.mjs",
+  "engines": { "node": ">=20" }
+}

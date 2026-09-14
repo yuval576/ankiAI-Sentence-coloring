@@ -2,6 +2,16 @@
 
 Permanent, matching Russian/English sentence colors, an offline vocabulary library, and an optional contextual AI tutor for desktop Anki and AnkiMobile.
 
+## Use it in another app
+
+The reusable, app-friendly part is
+[`packages/sentence-coloring-core`](packages/sentence-coloring-core). It has no
+Anki, account, provider, or filesystem dependency. It validates indexed word
+alignments from your server and renders safely escaped matching color spans.
+
+For a web or mobile app, use that package; keep AI credentials and alignment
+generation on your server. See its [integration guide](packages/sentence-coloring-core/README.md).
+
 This is a **Windows-first personal prototype**, not an official Anki or OpenAI product. It currently expects Russian Core 5000-compatible fields. The repository contains source code only—not a deck, recordings, account credentials, chat history, or generated study data.
 
 ## Features
