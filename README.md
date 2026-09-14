@@ -12,6 +12,11 @@ alignments from your server and renders safely escaped matching color spans.
 For a web or mobile app, use that package; keep AI credentials and alignment
 generation on your server. See its [integration guide](packages/sentence-coloring-core/README.md).
 
+For the latest Russian stress and pronunciation helper, use
+[`packages/russian-pronunciation-core`](packages/russian-pronunciation-core).
+It produces guides such as `SLU-cha-ya`, accepts only occurrence-specific
+verified stress, and labels uncertain stress instead of guessing.
+
 This is a **Windows-first personal prototype**, not an official Anki or OpenAI product. It currently expects Russian Core 5000-compatible fields. The repository contains source code only—not a deck, recordings, account credentials, chat history, or generated study data.
 
 ## Features

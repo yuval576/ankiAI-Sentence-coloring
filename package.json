@@ -6,8 +6,8 @@
   "description": "Permanent bilingual Anki colors and an offline vocabulary library with an optional AI tutor",
   "scripts": {
     "start": "node launcher.mjs",
-    "test": "node test-coloring-pipeline.mjs && node test-deck-memory.mjs && node test-automatic-memory.mjs && node --test packages/sentence-coloring-core/test/core.test.mjs",
-    "test:core": "node --test packages/sentence-coloring-core/test/core.test.mjs"
+    "test": "node test-coloring-pipeline.mjs && node test-deck-memory.mjs && node test-automatic-memory.mjs && node --test packages/sentence-coloring-core/test/core.test.mjs packages/russian-pronunciation-core/test/core.test.mjs",
+    "test:core": "node --test packages/sentence-coloring-core/test/core.test.mjs packages/russian-pronunciation-core/test/core.test.mjs"
   },
   "engines": { "node": ">=20" }
 }

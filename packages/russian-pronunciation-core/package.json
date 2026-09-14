@@ -1,0 +1,9 @@
+{
+  "name": "@yuval576/russian-pronunciation-core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Safe Russian stress annotation validation and approximate Latin pronunciation rendering.",
+  "exports": "./src/index.mjs",
+  "engines": { "node": ">=20" }
+}
